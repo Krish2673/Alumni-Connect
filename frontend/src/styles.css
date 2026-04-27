@@ -376,6 +376,21 @@ a:hover {
   margin-top: 12px;
 }
 
+.directory-card {
+  margin-bottom: 16px;
+}
+
+.directory-list {
+  margin-top: 8px;
+}
+
+.directory-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-top: 0;
+}
+
 .compose-card {
   margin-top: 10px;
 }

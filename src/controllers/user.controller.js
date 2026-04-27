@@ -77,17 +77,35 @@ export const uploadProfilePicture = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   try {
-    const { role, batch, branch, search } = req.query
+    const { role, batch, branch, company, skills, search, excludeMe } = req.query
     const filter = {}
 
     if (role) filter.role = role
     if (batch) filter.batch = Number(batch)
-    if (branch) filter.branch = branch
+    if (branch) filter.branch = { $regex: String(branch).trim(), $options: "i" }
+    if (company) filter.company = { $regex: String(company).trim(), $options: "i" }
+    if (excludeMe === "true") filter._id = { $ne: req.user._id }
+
+    if (skills) {
+      const skillsList = String(skills)
+        .split(",")
+        .map((skill) => skill.trim())
+        .filter(Boolean)
+
+      if (skillsList.length > 0) {
+        filter.skills = {
+          $all: skillsList.map((skill) => ({ $regex: skill, $options: "i" })),
+        }
+      }
+    }
+
     if (search) {
+      const searchRegex = { $regex: String(search).trim(), $options: "i" }
       filter.$or = [
-        { name: { $regex: search, $options: "i" } },
-        { skills: { $regex: search, $options: "i" } },
-        { company: { $regex: search, $options: "i" } },
+        { name: searchRegex },
+        { skills: searchRegex },
+        { company: searchRegex },
+        { branch: searchRegex },
       ]
     }
 
