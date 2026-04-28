@@ -38,7 +38,7 @@
   --ok-bg: #ecfdf5;
   --ok-text: #065f46;
   --site-bg-image: url("/college-bg.jpeg");
-  --site-bg-opacity: 0.3;
+  --site-bg-opacity: 0.5;
 }
 
 [data-theme="dark"] {
@@ -160,11 +160,16 @@ a:hover {
   backdrop-filter: blur(10px);
 }
 
+.navbar .container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .navbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 8px 0;
 }
 
 .brand {
