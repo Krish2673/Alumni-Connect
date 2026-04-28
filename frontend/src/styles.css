@@ -144,12 +144,6 @@ a:hover {
   padding: 14px 0;
 }
 
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .brand {
   display: inline-flex;
   align-items: center;
@@ -567,14 +561,6 @@ a:hover {
 }
 
 @media (max-width: 640px) {
-  .navbar-inner {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .navbar-right {
-    width: 100%;
-    justify-content: space-between;
-  }
   .grid2 {
     grid-template-columns: 1fr;
   }
