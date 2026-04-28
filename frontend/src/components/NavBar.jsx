@@ -6,7 +6,7 @@ import { getTheme, toggleTheme } from "../theme.js"
 export default function NavBar({ user, onLogout }) {
   const navigate = useNavigate()
   const [dark, setDark] = useState(() => getTheme() === "dark")
-  const collegeLogoSrc = "/college-logo.png"
+  const collegeLogoSrc = "/college-logo.jpeg"
 
   function handleThemeClick() {
     const next = toggleTheme()
@@ -27,44 +27,46 @@ export default function NavBar({ user, onLogout }) {
     <header className="navbar">
       <div className="container navbar-inner">
         <Link className="brand" to="/">
-          {/* <span className="brand-logo-wrap" aria-hidden>
-            <img className="brand-logo" src={collegeLogoSrc} alt="" />
-          </span> */}
           DYPCOE Alumni Connect
         </Link>
-        <nav className="navlinks">
-          {user ? (
-            user.role === "student" ? (
-              <NavLink to="/student">Student</NavLink>
-            ) : user.role === "alumni" ? (
-              <NavLink to="/alumni">Alumni</NavLink>
-            ) : user.role === "admin" ? (
-              <NavLink to="/admin">Admin</NavLink>
-            ) : null
-          ) : (
-            <NavLink to="/" end>
-              Feed
-            </NavLink>
-          )}
-          <NavLink to="/connections">Connections</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
-          <button
-            type="button"
-            className="btn btn-ghost theme-toggle"
-            onClick={handleThemeClick}
-            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            title={dark ? "Light mode" : "Dark mode"}
-          >
-            {dark ? "☀️" : "🌙"}
-          </button>
-          {user ? (
-            <button className="btn btn-ghost" onClick={handleLogout}>
-              Logout
+        <div className="navbar-right">
+          <nav className="navlinks">
+            {user ? (
+              user.role === "student" ? (
+                <NavLink to="/student">Student</NavLink>
+              ) : user.role === "alumni" ? (
+                <NavLink to="/alumni">Alumni</NavLink>
+              ) : user.role === "admin" ? (
+                <NavLink to="/admin">Admin</NavLink>
+              ) : null
+            ) : (
+              <NavLink to="/" end>
+                Feed
+              </NavLink>
+            )}
+            <NavLink to="/connections">Connections</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
+            <button
+              type="button"
+              className="btn btn-ghost theme-toggle"
+              onClick={handleThemeClick}
+              aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+              title={dark ? "Light mode" : "Dark mode"}
+            >
+              {dark ? "☀️" : "🌙"}
             </button>
-          ) : (
-            <NavLink to="/login">Login</NavLink>
-          )}
-        </nav>
+            {user ? (
+              <button className="btn btn-ghost" onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <NavLink to="/login">Login</NavLink>
+            )}
+          </nav>
+          <span className="nav-logo-slot" aria-label="College logo">
+            <img className="nav-logo" src={collegeLogoSrc} alt="College logo" />
+          </span>
+        </div>
       </div>
     </header>
   )
