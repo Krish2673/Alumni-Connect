@@ -10,6 +10,7 @@ export default function Register({ user }) {
   const [batch, setBatch] = useState("")
   const [branch, setBranch] = useState("")
   const [company, setCompany] = useState("")
+  const [linkedIn, setLinkedIn] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -39,6 +40,7 @@ export default function Register({ user }) {
           batch: role === "student" || role === "alumni" ? (batch ? Number(batch) : undefined) : undefined,
           branch: role === "student" || role === "alumni" ? branch || undefined : undefined,
           company: role === "alumni" ? company || undefined : undefined,
+          linkedIn: role === "student" || role === "alumni" ? linkedIn || undefined : undefined,
         },
       })
       setSuccess(true)
@@ -172,6 +174,17 @@ export default function Register({ user }) {
                     />
                   </label>
                 </div>
+                <label className="label">
+                  LinkedIn profile URL
+                  <input
+                    className="input"
+                    type="url"
+                    value={linkedIn}
+                    onChange={(e) => setLinkedIn(e.target.value)}
+                    required
+                    placeholder="https://www.linkedin.com/in/your-profile"
+                  />
+                </label>
               </>
             ) : null}
 

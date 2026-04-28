@@ -13,10 +13,13 @@ const cookieOptions = {
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, role, batch, branch, company } = req.body
+    const { name, email, password, role, batch, branch, company, linkedIn } = req.body
 
     if (!name || !email || !password || !role) {
       return res.status(400).json({ message: "Name, email, password and role are required" })
+    }
+    if ((role === "student" || role === "alumni") && !linkedIn) {
+      return res.status(400).json({ message: "LinkedIn is required for students and alumni" })
     }
 
     const emailNorm = String(email).trim().toLowerCase()
@@ -34,6 +37,7 @@ export const register = async (req, res) => {
       batch,
       branch,
       company: role === "alumni" ? company : undefined,
+      linkedIn: role === "student" || role === "alumni" ? String(linkedIn).trim() : undefined,
     })
 
     return res.status(201).json({

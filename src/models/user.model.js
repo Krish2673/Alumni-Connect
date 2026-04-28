@@ -48,7 +48,13 @@ const userSchema = new mongoose.Schema(
       },
     },
     skills: [String],
-    linkedIn: String,
+    linkedIn: {
+      type: String,
+      required: function () {
+        return this.role === "student" || this.role === "alumni"
+      },
+      trim: true,
+    },
     github: String,
     refreshToken: {
       type: String,
