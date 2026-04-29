@@ -79,9 +79,10 @@ export const getUsers = async (req, res) => {
   try {
     const { role, batch, branch, company, skills, search, excludeMe } = req.query
     const filter = {}
+    const normalizedRole = role ? String(role).trim().toLowerCase() : ""
 
-    if (role) filter.role = role
-    if (role === "alumni") filter.verificationStatus = "verified"
+    if (normalizedRole) filter.role = normalizedRole
+    if (normalizedRole === "alumni") filter.verificationStatus = "verified"
     if (batch) filter.batch = Number(batch)
     if (branch) filter.branch = { $regex: String(branch).trim(), $options: "i" }
     if (company) filter.company = { $regex: String(company).trim(), $options: "i" }

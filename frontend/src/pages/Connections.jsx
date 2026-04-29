@@ -45,7 +45,10 @@ export default function Connections() {
       if (batchFilter.trim()) params.set("batch", batchFilter.trim())
 
       const result = await apiFetch(`/api/v1/users?${params.toString()}`)
-      setDirectoryUsers(result.users || [])
+      const safeUsers = (result.users || []).filter(
+        (u) => u?.role !== "alumni" || u?.verificationStatus === "verified"
+      )
+      setDirectoryUsers(safeUsers)
     } catch (err) {
       setError(err.message)
     } finally {
